@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Gold Purity Measurement</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+    body {
+        font-family: 'Georgia', serif;
+        background: linear-gradient(135deg, #e7741c, #1c1c28);
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        min-height: 100vh;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    /* Floating particles */
+    .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .particle {
+        position: absolute;
+        background: rgba(255, 223, 170, 0.6);
+        border-radius: 50%;
+        animation: float linear infinite;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(100vh) translateX(0) scale(1); opacity: 0.6; }
+        50% { opacity: 1; }
+        100% { transform: translateY(-10vh) translateX(50px) scale(1.2); opacity: 0; }
+    }
+
+    .container {
+        background: linear-gradient(145deg, #d5a43b, #f3dca4);
+
+        border-radius: 25px;
+        padding: 40px 30px;
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 50px rgba(255,223,170,0.3);
+        position: relative;
+        z-index: 1; /* container above particles */
+        overflow: hidden;
+    }
+
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: #5a4630;
+        text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        text-align: left;
+        color: #5a4630;
+    }
+
+    input {
+        padding: 12px 15px;
+        border-radius: 12px;
+        border: none;
+        font-size: 1rem;
+        outline: none;
+        box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+    }
+
+    input:focus {
+        box-shadow: 0 0 15px rgba(255,223,170,0.4);
+    }
+
+    button {
+        padding: 12px;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 15px;
+        background: linear-gradient(145deg, #d3a416, #efd599);
+        color: #5a4630;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    #result {
+        margin-top: 25px;
+        font-size: 1.1rem;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        color: #3c2f1d;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #result::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -75%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(120deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+        transform: skewX(-25deg);
+        animation: shimmer 2.5s infinite;
+    }
+
+    @keyframes shimmer {
+        0% { left: -75%; }
+        100% { left: 125%; }
+    }
+
+    /* Responsive */
+    @media (max-width: 500px) {
+        .container {
+            padding: 30px 20px;
+        }
+        h1 {
+            font-size: 1.5rem;
+        }
+        button {
+            font-size: 1rem;
+            padding: 10px;
+        }
+        #result {
+            font-size: 1rem;
+            padding: 15px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="particles"></div>
+
+<div class="container">
+    <h1>Gold Purity Measurement</h1>
+    <form id="purityForm">
+        <label for="weightAir">Weight in Air (grams):</label>
+        <input type="number" id="weightAir" name="weightAir" step="0.01" required>
+
+        <label for="weightWater">Weight in Water (grams):</label>
+        <input type="number" id="weightWater" name="weightWater" step="0.01" required>
+
+        <button type="submit">Calculate Purity</button>
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    const form = document.getElementById('purityForm');
+    const resultDiv = document.getElementById('result');
+    const RHO_GOLD = 19.32;
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const weightAir = parseFloat(document.getElementById('weightAir').value);
+        const weightWater = parseFloat(document.getElementById('weightWater').value);
+
+        if (isNaN(weightAir) || isNaN(weightWater)) {
+            resultDiv.textContent = "Please enter valid numbers.";
+            return;
+        }
+        if (weightAir <= weightWater) {
+            resultDiv.textContent = "Error: Weight in water must be less than weight in air.";
+            return;
+        }
+
+        const density = weightAir / (weightAir - weightWater);
+        const purity = (density / RHO_GOLD) * 100;
+        const karat = (density / RHO_GOLD) * 24;
+
+        resultDiv.innerHTML = `
+            <strong>Sample Density:</strong> ${density.toFixed(2)} g/cm³ <br>
+            <strong>Gold Purity:</strong> ${purity.toFixed(2)}% <br>
+            <strong>Gold Karat:</strong> ${karat.toFixed(2)}K
+        `;
+    });
+
+    // Create floating particles
+    const particlesContainer = document.querySelector('.particles');
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = (5 + Math.random() * 10) + 's';
+        particle.style.width = particle.style.height = (2 + Math.random() * 4) + 'px';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particlesContainer.appendChild(particle);
+    }
+</script>
+
+</body>
+</html>
