@@ -1,224 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luxury Gold Purity Measurement</title>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Luxury Gold Purity Measurement</title>
+  <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
-
     body {
-        font-family: 'Georgia', serif;
-        background: linear-gradient(135deg, #e7741c, #1c1c28);
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        min-height: 100vh;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #e7b11c, #1c1c28);
+      margin: 0; padding: 0;
+      min-height: 100vh;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
     }
-
-    /* Floating particles */
     .particles {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 0;
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 0;
     }
-
     .particle {
-        position: absolute;
-        background: rgba(255, 223, 170, 0.6);
-        border-radius: 50%;
-        animation: float linear infinite;
+      position: absolute;
+      background: rgba(255, 223, 170, 0.6);
+      border-radius: 50%;
+      animation: float linear infinite;
     }
-
     @keyframes float {
-        0% { transform: translateY(100vh) translateX(0) scale(1); opacity: 0.6; }
-        50% { opacity: 1; }
-        100% { transform: translateY(-10vh) translateX(50px) scale(1.2); opacity: 0; }
+      0% { transform: translateY(100vh) translateX(0) scale(1); opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-10vh) translateX(50px) scale(1.2); opacity: 0; }
     }
-
+    .crown-top {
+      width: clamp(60px, 12vw, 100px);
+      margin: 20px auto;
+      display: block;
+      filter: drop-shadow(0 0 10px gold);
+      animation: crownGlow 3s infinite ease-in-out;
+      z-index: 2;
+    }
+    @keyframes crownGlow {
+      0%, 100% { filter: drop-shadow(0 0 10px gold); }
+      50% { filter: drop-shadow(0 0 25px #ffeb3b); }
+    }
     .container {
-        background: linear-gradient(145deg, #d5a43b, #f3dca4);
-
-        border-radius: 25px;
-        padding: 40px 30px;
-        max-width: 400px;
-        width: 100%;
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 50px rgba(255,223,170,0.3);
-        position: relative;
-        z-index: 1; /* container above particles */
-        overflow: hidden;
+      background: linear-gradient(145deg, #d5a43b, #f3dca4);
+      border-radius: 25px;
+      padding: 40px 30px;
+      width: 90%;
+      max-width: 450px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 50px rgba(255,223,170,0.3);
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      margin: 20px auto;
     }
-
     h1 {
-        font-family: 'Playfair Display', serif;
-        font-size: 2rem;
-        margin-bottom: 30px;
-        color: #5a4630;
-        text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 5vw, 2.2rem);
+      margin-bottom: 30px;
+      color: #5a4630;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
     }
-
     form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
+      display: flex; flex-direction: column; gap: 15px;
     }
-
     label {
-        font-weight: bold;
-        text-align: left;
-        color: #5a4630;
+      font-weight: bold;
+      text-align: left;
+      color: #5a4630;
+      font-size: clamp(0.9rem, 3vw, 1rem);
     }
-
     input {
-        padding: 12px 15px;
-        border-radius: 12px;
-        border: none;
-        font-size: 1rem;
-        outline: none;
-        box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+      padding: 12px 15px;
+      border-radius: 12px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
     }
-
-    input:focus {
-        box-shadow: 0 0 15px rgba(255,223,170,0.4);
-    }
-
+    input:focus { box-shadow: 0 0 15px rgba(255,223,170,0.4); }
     button {
-        padding: 12px;
-        font-size: 1.1rem;
-        border: none;
-        border-radius: 15px;
-        background: linear-gradient(145deg, #d3a416, #efd599);
-        color: #5a4630;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      padding: 12px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #d3a416, #efd599);
+      color: #5a4630;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      width: 100%;
     }
-
     button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
     }
-
     #result {
-        margin-top: 25px;
-        font-size: 1.1rem;
-        background: rgba(255, 255, 255, 0.15);
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-        color: #3c2f1d;
-        position: relative;
-        overflow: hidden;
+      margin-top: 25px;
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
+      background: rgba(255, 255, 255, 0.15);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+      color: #3c2f1d;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.5s ease;
+      word-wrap: break-word;
     }
-
     #result::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -75%;
-        width: 50%;
-        height: 100%;
-        background: linear-gradient(120deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
-        transform: skewX(-25deg);
-        animation: shimmer 2.5s infinite;
+      content: '';
+      position: absolute;
+      top: 0; left: -75%;
+      width: 50%; height: 100%;
+      background: linear-gradient(
+        120deg,
+        rgba(255,255,255,0.1),
+        rgba(255,255,255,0.3),
+        rgba(255,255,255,0.1)
+      );
+      transform: skewX(-25deg);
+      animation: shimmer 2.5s infinite;
     }
-
+    .result-line {
+      margin: 10px 0;
+    }
+    .value {
+      font-weight: bold;
+      font-size: clamp(1.1rem, 3vw, 1.3rem);
+      color: #2e1d0a;
+    }
     @keyframes shimmer {
-        0% { left: -75%; }
-        100% { left: 125%; }
+      0% { left: -75%; }
+      100% { left: 125%; }
     }
-
-    /* Responsive */
-    @media (max-width: 500px) {
-        .container {
-            padding: 30px 20px;
-        }
-        h1 {
-            font-size: 1.5rem;
-        }
-        button {
-            font-size: 1rem;
-            padding: 10px;
-        }
-        #result {
-            font-size: 1rem;
-            padding: 15px;
-        }
-    }
-</style>
+  </style>
 </head>
 <body>
+  <div class="particles"></div>
 
-<div class="particles"></div>
+  <!-- Crown Image -->
+  <!-- <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAPFBMVEX..." 
+       alt="Gold Crown" class="crown-top"> -->
 
-<div class="container">
+  <div class="container">
     <h1>Gold Purity Measurement</h1>
     <form id="purityForm">
-        <label for="weightAir">Weight in Air (grams):</label>
-        <input type="number" id="weightAir" name="weightAir" step="0.01" required>
-
-        <label for="weightWater">Weight in Water (grams):</label>
-        <input type="number" id="weightWater" name="weightWater" step="0.01" required>
-
-        <button type="submit">Calculate Purity</button>
+      <label for="weightAir">Weight in Air (grams):</label>
+      <input type="number" id="weightAir" name="weightAir" step="0.01" required>
+      <label for="weightWater">Weight in Water (grams):</label>
+      <input type="number" id="weightWater" name="weightWater" step="0.01" required>
+      <button type="submit">Calculate Purity</button>
+      <button type="reset">Reset</button>
     </form>
-
     <div id="result"></div>
-</div>
+  </div>
 
-<script>
+  <script>
     const form = document.getElementById('purityForm');
     const resultDiv = document.getElementById('result');
     const RHO_GOLD = 19.32;
 
+    function animateValue(element, start, end, duration, decimals = 2, suffix="") {
+      let startTime = null;
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const value = (start + (end - start) * progress).toFixed(decimals);
+        element.textContent = value + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
     form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const weightAir = parseFloat(document.getElementById('weightAir').value);
-        const weightWater = parseFloat(document.getElementById('weightWater').value);
+      e.preventDefault();
+      const weightAir = parseFloat(document.getElementById('weightAir').value);
+      const weightWater = parseFloat(document.getElementById('weightWater').value);
+      if (isNaN(weightAir) || isNaN(weightWater) || weightAir <= weightWater) {
+        resultDiv.textContent = "Please enter valid numbers (air > water).";
+        return;
+      }
 
-        if (isNaN(weightAir) || isNaN(weightWater)) {
-            resultDiv.textContent = "Please enter valid numbers.";
-            return;
-        }
-        if (weightAir <= weightWater) {
-            resultDiv.textContent = "Error: Weight in water must be less than weight in air.";
-            return;
-        }
+      const density = weightAir / (weightAir - weightWater);
+      const purity = (density / RHO_GOLD) * 100;
+      const karat = Math.min((purity / 100) * 24, 24);
 
-        const density = weightAir / (weightAir - weightWater);
-        const purity = (density / RHO_GOLD) * 100;
-        const karat = (density / RHO_GOLD) * 24;
+      let classification = "";
+      if (karat >= 22) classification = "24K Pure Gold";
+      else if (karat >= 18) classification = "18K Standard Jewelry";
+      else if (karat >= 14) classification = "14K Jewelry";
+      else classification = "Low Purity Alloy";
 
-        resultDiv.innerHTML = `
-            <strong>Sample Density:</strong> ${density.toFixed(2)} g/cm³ <br>
-            <strong>Gold Purity:</strong> ${purity.toFixed(2)}% <br>
-            <strong>Gold Karat:</strong> ${karat.toFixed(2)}K
-        `;
+      resultDiv.innerHTML = `
+        <div class="result-line"><strong>Sample Density:</strong> <span id="densityVal" class="value">0</span> g/cm³</div>
+        <div class="result-line"><strong>Gold Purity:</strong> <span id="purityVal" class="value">0</span>%</div>
+        <div class="result-line"><strong>Gold Karat:</strong> <span id="karatVal" class="value">0</span>K</div>
+        <div class="result-line"><strong>Classification:</strong> <span id="classVal" class="value">${classification}</span></div>
+      `;
+
+      if (purity > 90) resultDiv.style.background = "rgba(255, 215, 0, 0.3)";
+      else if (purity > 60) resultDiv.style.background = "rgba(255, 165, 0, 0.3)";
+      else resultDiv.style.background = "rgba(255, 0, 0, 0.2)";
+
+      animateValue(document.getElementById("densityVal"), 0, density, 1500, 2);
+      animateValue(document.getElementById("purityVal"), 0, purity, 1500, 1, "%");
+      animateValue(document.getElementById("karatVal"), 0, karat, 1500, 1, "K");
     });
 
-    // Create floating particles
     const particlesContainer = document.querySelector('.particles');
     for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        particle.style.left = Math.random() * 100 + 'vw';
-        particle.style.animationDuration = (5 + Math.random() * 10) + 's';
-        particle.style.width = particle.style.height = (2 + Math.random() * 4) + 'px';
-        particle.style.animationDelay = Math.random() * 5 + 's';
-        particlesContainer.appendChild(particle);
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.animationDuration = (5 + Math.random() * 10) + 's';
+      particle.style.width = particle.style.height = (2 + Math.random() * 4) + 'px';
+      particle.style.animationDelay = Math.random() * 5 + 's';
+      particlesContainer.appendChild(particle);
     }
-</script>
-
+  </script>
 </body>
 </html>
